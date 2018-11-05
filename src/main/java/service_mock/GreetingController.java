@@ -52,7 +52,7 @@ public class GreetingController {
     public void CreateMocks(
                             @RequestParam(value = "mockPath")
                                     String mockPath,
-                            @RequestParam(value = "mockMethod", required = true)
+                            @RequestParam(value = "mockMethod")
                                     String mockMethod,
                             @RequestParam(value = "returnJson",required = false,defaultValue="{\"tips\",\"你不应该看到这个界面\"}")
                                     String returnJson,
@@ -93,18 +93,8 @@ public class GreetingController {
     * */
 
     @RequestMapping(value = "/**")
-     public ResponseEntity<Map<String, Object>> FourLevel(
-                                                         HttpServletRequest request){
-//    public ResponseEntity<Map<String, Object>> FourLevel(@PathVariable("firstLevel")String firstLevel,
-//                                                         @PathVariable("secondLevel")String secondLevel,
-//                                                         @PathVariable("thirdLevel")String thirdLevel,
-//                                                         @PathVariable("fourLevel")String fourLevel,
-//                                                         HttpServletRequest request
-//    ){
-
-        //String webPath = "/"+firstLevel+"/"+secondLevel+"/"+thirdLevel+"/"+fourLevel;
-        //System.out.println(request.getRequestURL());
-        //System.out.println(request.getServletPath());
+     public ResponseEntity<Map<String, Object>> DecideLevel(
+             HttpServletRequest request){
         return MockDecide(request.getServletPath(),request.getMethod());
     }
 
@@ -115,15 +105,15 @@ public class GreetingController {
         }
         String jsonString = mdm.GetMethodJson(method);
         ObjectMapper mapper = new ObjectMapper();
-        Map m = null;
+        Map mJson = null;
         try {
-            m = mapper.readValue(jsonString,Map.class);
+            mJson = mapper.readValue(jsonString,Map.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
         String StrStatus =  mdm.GetMethodStatus(method);
         Integer states  = Integer.parseInt(StrStatus);
-       return new ResponseEntity<Map<String,Object>>(m, HttpStatus.valueOf(states));  // m;
+       return new ResponseEntity<Map<String,Object>>(mJson, HttpStatus.valueOf(states));  // m;
 
     }
 
