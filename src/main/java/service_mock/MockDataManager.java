@@ -1,5 +1,6 @@
 package service_mock;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 public class MockDataManager {
@@ -14,7 +15,7 @@ public class MockDataManager {
     * 获取方法对应的json
     * */
 
-    public MockDataManager() {
+    public MockDataManager(){
         methodHM = new HashMap<>();
         statusHM = new HashMap<>();
     }
@@ -35,8 +36,13 @@ public class MockDataManager {
 
 
 
+    public HashMap<String, String> getMethodHM() {
+        return methodHM;
+    }
 
-
+    public HashMap<String, String> getStatusHM() {
+        return statusHM;
+    }
 }
 
 

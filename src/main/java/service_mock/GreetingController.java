@@ -29,7 +29,7 @@ public class GreetingController {
 
     /*
     * mock:
-    * GET /mocks    -- 列出所有mocks
+    * GET /mocks        -- 列出所有mocks                       √
     * GET /mocks/<path> -- 查询指定path的mocks信息
     * PUT /mocks/<path> -- 更新指定path的mocks信息,注意是幂等的
     * POST/mocks        -- 创建一个新的mock                    √
@@ -47,6 +47,11 @@ public class GreetingController {
     * //能否对超时请求进行测试?
     *
     * */
+    @GetMapping(value = "/mocks")
+    public HashMap<String,MockDataManager> QueryMocks(){
+        return DataHM;
+    }
+
 
     @PostMapping(value = "/mocks")
     public void CreateMocks(
