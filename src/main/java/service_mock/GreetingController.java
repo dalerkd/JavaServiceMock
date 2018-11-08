@@ -97,7 +97,11 @@ public class GreetingController {
     * 只所以没有进行处理是因为
     * */
 
-    @RequestMapping(value = "/**")
+
+    /*
+    * 为了避免/index和 /static/被映射所以使用了这个...
+    * */
+    @RequestMapping(value = "/{firstLevel:^[^s]}/**")
      public ResponseEntity<Map<String, Object>> DecideLevel(
              HttpServletRequest request){
         return MockDecide(request.getServletPath(),request.getMethod());
